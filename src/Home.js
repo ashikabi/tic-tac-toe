@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
-import logo from './images/pokeball.png';
 import title from './images/title.png';
 import subtitle from './images/subtitle.png';
 import FormDialog from './FormDialog';
 
 class Home extends Component {
+
+  componentDidMount(){
+    localStorage.setItem('sizeBoard', "3");//by default 3x3
+  }
 
   handleSubmit(event){
     event.preventDefault();
@@ -29,7 +32,9 @@ class Home extends Component {
             </div>
 
             <div className="item">
-              <img src={logo} className="Home-logo" alt="logo" />
+              {
+                //<img src={logo} className="Home-logo" alt="logo" />
+              }
               <FormDialog />
             </div>
 

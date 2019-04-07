@@ -1,8 +1,6 @@
-//import {jQuery} from './jquery-3.2.1.min'
-import jQuery,{$} from './loader'
+import  './loader'
 
 (function ($) {
-	"use strict";
 	$('.col').on('mouseover',function(){
 		var table1 = $(this).parent().parent().parent();
 		var table2 = $(this).parent().parent();
@@ -24,4 +22,4 @@ import jQuery,{$} from './loader'
 	});
     
 
-})(jQuery);
+})(window.jQuery);
