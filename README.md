@@ -10,8 +10,7 @@ In order to run locally this game you will need do the following steps:
 3.- execute in terminal/console this command : $ npm install (this will download all the packages required)
 
 4.- after that you can run the project with this command : npm start  
-
-(https://cdn-images-1.medium.com/max/800/1*81GhGbn6cnJycDP92rBDqQ.png)
+![Replace with a gif you feel captures the soul of your service](ttps://cdn-images-1.medium.com/max/800/1*81GhGbn6cnJycDP92rBDqQ.png)
 
 Regarding the Rules Game:
 ---------------------------------
