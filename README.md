@@ -11,6 +11,8 @@ In order to run locally this game you will need do the following steps:
 
 4.- after that you can run the project with this command : npm start  
 
+5.- then in your favorite browser type un the url : localhost:3000 in order to access to the home of the tic tac toe
+
 Regarding the Rules Game:
 ---------------------------------
 
