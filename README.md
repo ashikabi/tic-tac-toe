@@ -4,8 +4,12 @@ TIC TAC TOE GAME WITH REACTJS
 In order to run locally this game you will need do the following steps:
 
 1.- copy this repo whenever you want through zip or git clone
+
 2.- then go into the project
-3.- execute in terminal/console this command : $ npm install (this will download all the packages required)4.- after that you can run the project with this command : npm start  
+
+3.- execute in terminal/console this command : $ npm install (this will download all the packages required)
+
+4.- after that you can run the project with this command : npm start  
 
 Regarding the Rules Game:
 ---------------------------------
