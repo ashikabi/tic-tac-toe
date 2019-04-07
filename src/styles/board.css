@@ -88,6 +88,7 @@ margin-right: 5%;
 
 .turn {
   flex: 1;
+  align-self: center;
   animation: blink-animation 1s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }

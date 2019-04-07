@@ -6,6 +6,7 @@ import playerz from './images/player-z.png';
 import playerx from './images/player-x.png';
 import currentPlayer from './images/turn-player.png';
 import './styles/board.css';
+import InfoDialog from './InfoDialog';
 
 const emptyStyle = {width: 200,height: 200};
 const squareStyle = {width: 75,height: 75,margin:10};
@@ -19,12 +20,13 @@ class GameBoard extends Component {
     this.state={
       sizeBoard:3,
       currentTurn:true,// X = true ; 0 = false
+      isFinished:false
     }
   }
 
   componentDidMount(){
       let selectedSize = localStorage.getItem('sizeBoard');
-      this.MAX_SIZE = this.state.sizeBoard;
+      this.MAX_SIZE = selectedSize;
       this.setState({ sizeBoard:selectedSize});
       this.setState({currentTurn : true});
       console.log(`selected value : ${selectedSize}x${selectedSize}`);
@@ -55,8 +57,10 @@ class GameBoard extends Component {
       this.setState({currentTurn:!this.state.currentTurn});
       this.saveSelectedChoice(event);
       this.isThereAwinner();  
-      if(this.winner!=='D')
+      if(this.winner!=='*'){
+        this.setState({isFinished:true});
         console.log(`::::::::::: el ganador es ${this.winner} :::::::::::::`);
+      }
     }
   }
 
@@ -69,7 +73,7 @@ class GameBoard extends Component {
       isAline = true;
       for(i=0;i<this.MAX_SIZE;i++){
         if(this.playBoard[j][i]!=='X')
-        isAline = false;
+          isAline = false;
       }
       if(isAline){
         this.winner = "X"
@@ -82,7 +86,7 @@ class GameBoard extends Component {
       isAline = true;
       for(i=0;i<this.MAX_SIZE;i++){
         if(this.playBoard[j][i]!=='0')
-        isAline = false;
+          isAline = false;
       }
       if(isAline){
         this.winner = "0"
@@ -96,7 +100,7 @@ class GameBoard extends Component {
       isAline = true;
       for(i=0;i<this.MAX_SIZE;i++){
         if(this.playBoard[i][j]!=='X')
-        isAline = false;
+          isAline = false;
       }
       if(isAline){
         this.winner = "X"
@@ -109,7 +113,7 @@ class GameBoard extends Component {
       isAline = true;
       for(i=0;i<this.MAX_SIZE;i++){
         if(this.playBoard[i][j]!=='0')
-        isAline = false;
+          isAline = false;
       }
       if(isAline){
         this.winner = "0"
@@ -162,15 +166,23 @@ class GameBoard extends Component {
         return;
       }
    
-
-    //otherwise is a draw
-    this.winner = "D"
+      isAline = false;
+      for(j=0;j<this.MAX_SIZE;j++){
+        for(i=0;i<this.MAX_SIZE;i++){
+          if(this.playBoard[i][j]==='*')
+            isAline = true;
+        }
+      }
+      if(!isAline){
+        this.winner = "D"// is a Draw
+        return;
+      }
   }
 
   saveSelectedChoice(event){
     let valsJI = event.target.name;
     let ji = valsJI.split("|");
-    this.playBoard[ji[0]][ji[1]] = (this.state.currentTurn? 'X':'O');
+    this.playBoard[ji[0]][ji[1]] = (this.state.currentTurn? 'X':'0');
     console.log(this.playBoard);
   }
 
@@ -225,6 +237,9 @@ class GameBoard extends Component {
                   </tbody>
                 </table>
               </form>
+              {
+                this.state.isFinished?<InfoDialog winner={this.winner} />:null
+              }
             </div>
         </div>
       </div>

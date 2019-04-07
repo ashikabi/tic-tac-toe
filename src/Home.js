@@ -32,9 +32,6 @@ class Home extends Component {
             </div>
 
             <div className="item">
-              {
-                //<img src={logo} className="Home-logo" alt="logo" />
-              }
               <FormDialog />
             </div>
 

@@ -34,7 +34,7 @@ class FormDialog extends React.Component {
   handleChange = (event) => {
     this.setState({ value: event.target.value });
     localStorage.setItem('sizeBoard', event.target.value.toString());
-    //console.log(`selected value : ${event.target.value}x${event.target.value}`);
+    console.log(`selected value : ${event.target.value}x${event.target.value}`);
   };
 
   handleClickOpen = () => {
@@ -48,7 +48,7 @@ class FormDialog extends React.Component {
   renderMenuItems(){
     let itemList = [];
     for(let i=3; i<MAX_SIZE_BOARD;i++){
-      itemList.push(<MenuItem value={i}>{i}</MenuItem>);
+      itemList.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
     }
     return itemList;
   }
@@ -57,11 +57,6 @@ class FormDialog extends React.Component {
 
     return (
       <div>
-        {
-        //<Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-        //  Open form dialog
-        //</Button>
-        }
         <form id="modal" name="modal">
           <img src={logo} className="Home-logo" alt="logo" onClick={()=>{this.handleClickOpen()}} style={{"pointerEvents": "all"}} title="Press the Pokeball..." />
         </form>
