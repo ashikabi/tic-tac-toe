@@ -20,6 +20,7 @@ code {
 
 .Home-logo {
   animation: Home-logo-spin infinite 10s linear;
+  cursor: pointer;
   height: 40vmin;
   pointer-events: none;
   margin-right: 50%;

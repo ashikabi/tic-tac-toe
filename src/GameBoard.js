@@ -7,13 +7,15 @@ import playerx from './images/player-x.png';
 import currentPlayer from './images/turn-player.png';
 import './styles/board.css';
 import InfoDialog from './InfoDialog';
+import FormDialog from './FormDialog';
+import Button from '@material-ui/core/Button';
 
 const emptyStyle = {width: 200,height: 200};
 const squareStyle = {width: 75,height: 75,margin:10};
 
 class GameBoard extends Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.playBoard = [];
     this.winner = "*";
     this.MAX_SIZE = 3;
@@ -29,11 +31,11 @@ class GameBoard extends Component {
       this.MAX_SIZE = selectedSize;
       this.setState({ sizeBoard:selectedSize});
       this.setState({currentTurn : true});
-      console.log(`selected value : ${selectedSize}x${selectedSize}`);
+      //console.log(`selected value : ${selectedSize}x${selectedSize}`);
       this.cleanPlayBoard();
   }
 
-  cleanPlayBoard(){
+  cleanPlayBoard(full){
     let rows = [];
     let cols = [];
     for(let j=0;j<this.MAX_SIZE;j++){
@@ -43,14 +45,23 @@ class GameBoard extends Component {
       }
       rows.push(cols);
     }
-    console.log(rows);
     this.playBoard = rows;
+    
+    if(full){
+      for(let j=0;j<this.MAX_SIZE;j++){
+        for(let i=0;i<this.MAX_SIZE;i++){
+          document.getElementById(`${j+1}${i+1}`).src = empty;
+          document.getElementById(`${j+1}${i+1}`).alt = 'empty';
+        }
+      }
+      this.setState({isFinished:false});
+      this.winner = "*";
+    }
+    
+    
   }
 
   playerValue(event){
-    console.log("---------------------------------");
-    console.log(event.target);
-    console.log("---------------------------------");
     if(event.target.alt==='empty'){
       event.target.src = (this.state.currentTurn? xblue:Ored);
       event.target.alt = (this.state.currentTurn? 'X':'O');
@@ -183,7 +194,7 @@ class GameBoard extends Component {
     let valsJI = event.target.name;
     let ji = valsJI.split("|");
     this.playBoard[ji[0]][ji[1]] = (this.state.currentTurn? 'X':'0');
-    console.log(this.playBoard);
+    //console.log(this.playBoard);
   }
 
 
@@ -198,7 +209,7 @@ class GameBoard extends Component {
         cols = [];
         for(i=0 ; i < this.MAX_SIZE ; i++){//cols
           cols.push(<td id={`${j}|${i}`} key={`${j}|${i}`} className={`col column${i}`} data-column={`column${i}`}>
-                        <img id={`${j}|${i}`} name={`${j}|${i}`} src={empty} alt='empty' style={emptyStyle} onClick={(event) => {this.playerValue(event)}} />
+                        <img id={`${j+1}${i+1}`} name={`${j}|${i}`} ref={`xz${j}${i}`} src={empty} alt='empty' style={emptyStyle} onClick={(event) => {this.playerValue(event)}} />
                     </td>);
         }
         rows.push(<tr id={`${j}`} key={`${j}`} className="rw">{cols}</tr>);
@@ -210,6 +221,14 @@ class GameBoard extends Component {
   
     return rows;
 
+  }
+
+  reloadBoard(){
+    window.location.reload();
+  }
+
+  handleGoHome(){
+    this.props.history.push('/');
   }
 
     render() {
@@ -228,6 +247,10 @@ class GameBoard extends Component {
               <img src={playerz} className="player-status" alt="PlayerZ" />
             </div>
           </div>
+          <Button variant="outlined" color="primary" onClick={() =>{this.handleGoHome()}}>
+            Go Home
+          </Button>
+          <FormDialog isPokeball={false} reload={()=>{this.reloadBoard();}} />
         <div className="container-table100">
             <div className="table100 ver1">
             <form id="board" name="board">
@@ -238,7 +261,7 @@ class GameBoard extends Component {
                 </table>
               </form>
               {
-                this.state.isFinished?<InfoDialog winner={this.winner} />:null
+                this.state.isFinished?<InfoDialog winner={this.winner} resetGame={(full)=>{this.cleanPlayBoard(full)}} />:null
               }
             </div>
         </div>

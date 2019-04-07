@@ -24,7 +24,7 @@ const styles = theme => ({
 class FormDialog extends React.Component {
   constructor(props){
     super(props);
-
+    this.control = false;
     this.state = {
       open: false,
       value:3,
@@ -32,6 +32,7 @@ class FormDialog extends React.Component {
   }
   
   handleChange = (event) => {
+    this.control = true;
     this.setState({ value: event.target.value });
     localStorage.setItem('sizeBoard', event.target.value.toString());
     console.log(`selected value : ${event.target.value}x${event.target.value}`);
@@ -45,6 +46,14 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   };
 
+  handleContinue= () => {
+    if(!this.props.isPokeball)
+      this.props.reload();
+    if(!this.control)
+      localStorage.setItem('sizeBoard', 3);
+    this.setState({ open: false });
+  }
+
   renderMenuItems(){
     let itemList = [];
     for(let i=3; i<MAX_SIZE_BOARD;i++){
@@ -57,9 +66,15 @@ class FormDialog extends React.Component {
 
     return (
       <div>
+        {this.props.isPokeball? 
         <form id="modal" name="modal">
           <img src={logo} className="Home-logo" alt="logo" onClick={()=>{this.handleClickOpen()}} style={{"pointerEvents": "all"}} title="Press the Pokeball..." />
-        </form>
+      </form>
+      :
+      <Button variant="outlined" color="primary" onClick={() =>{this.handleClickOpen()}}>
+        Dimension Board
+      </Button>
+      }
         <Dialog
           open={this.state.open}
           onClose={() => {this.handleClose()}}
@@ -99,7 +114,7 @@ class FormDialog extends React.Component {
             <Button onClick={() => {this.handleClose()}} color="primary">
               Cancel
             </Button>
-            <Button onClick={() => {this.handleClose()}} color="primary">
+            <Button onClick={() => {this.handleContinue()}} color="primary">
               Continue
             </Button>
           </DialogActions>

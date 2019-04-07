@@ -14,8 +14,8 @@ const squareStyle = {width: 75,height: 75,margin:10};
 const largeStyle = {width: 150,height: 75,margin : '0 200px'};
 
 class InfoDialog extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.imageWinner='';
     this.state = {
       open: true,
@@ -44,6 +44,7 @@ class InfoDialog extends React.Component {
   };
 
   handleClose = () => {
+    this.props.resetGame(true);
     this.setState({ open: false });
   };
 

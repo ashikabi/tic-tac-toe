@@ -32,7 +32,7 @@ class Home extends Component {
             </div>
 
             <div className="item">
-              <FormDialog />
+              <FormDialog isPokeball={true} />
             </div>
 
             <div className="item">
