@@ -54,3 +54,51 @@
     color: #fff;
   }
 
+.player-status {
+  height: 60%;
+  width: 60%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.info-players{
+  margin-left: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.player-x {
+flex: 1;
+margin-left: 5%;
+margin-right: 5%;
+}
+
+.player-0 {
+  flex: 1;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.current-turn {
+  flex: 1;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.turn {
+  flex: 1;
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

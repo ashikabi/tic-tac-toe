@@ -50,9 +50,6 @@ class FormDialog extends React.Component {
     for(let i=3; i<MAX_SIZE_BOARD;i++){
       itemList.push(<MenuItem value={i}>{i}</MenuItem>);
     }
-    console.log("--------------------------------------");
-    console.log(itemList);
-    console.log("--------------------------------------");
     return itemList;
   }
 
